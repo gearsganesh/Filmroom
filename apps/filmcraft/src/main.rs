@@ -61,7 +61,7 @@ fn tell(text: &str, error: bool) {
     #[cfg(all(target_os = "windows", not(debug_assertions)))]
     {
         let level = if error { rfd::MessageLevel::Error } else { rfd::MessageLevel::Info };
-        let _ = rfd::MessageDialog::new().set_level(level).set_title("Filmroom".set_description(text).show();
+        let _ = rfd::MessageDialog::new().set_level(level).set_title("Filmroom").set_description(text).show();
     }
 }
 
