@@ -1,12 +1,4 @@
-<p align="center">
-  <a href="https://getartcraft.com/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/brand/artcraft-logo-white.svg">
-      <img alt="Artroom" src="docs/brand/artcraft-logo.svg" width="200">
-    </picture>
-  </a>
-</p>
-
+<p align="center"><img src="assets/brand/filmroom-logo.svg" alt="Filmroom" width="300"></p>
 
 <h1 align="center">Filmroom</h1>
 
