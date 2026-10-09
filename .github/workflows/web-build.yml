@@ -1,0 +1,53 @@
+name: Filmroom web build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/filmcraft-web/**"
+      - "crates/**"
+      - "xtask/**"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "vercel.json"
+      - "deploy/**"
+      - ".github/workflows/web-build.yml"
+  pull_request:
+    paths:
+      - "apps/filmcraft-web/**"
+      - "crates/**"
+      - "xtask/**"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "vercel.json"
+      - "deploy/**"
+      - ".github/workflows/web-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - name: Install wasm-bindgen CLI
+        run: cargo install wasm-bindgen-cli --version 0.2.129 --locked
+      - name: Build browser app
+        run: cargo xtask web
+      - name: Verify static output
+        run: test -s target/web/dist/index.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: filmroom-web-dist
+          path: target/web/dist/
+          if-no-files-found: error
+          retention-days: 7
