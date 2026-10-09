@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "rustup target add wasm32-unknown-unknown && cargo install wasm-bindgen-cli --version 0.2.129 --locked",
-  "buildCommand": "cargo xtask web",
+  "installCommand": "true",
+  "buildCommand": "bash deploy/vercel-build.sh",
   "outputDirectory": "target/web/dist",
   "cleanUrls": true
 }
