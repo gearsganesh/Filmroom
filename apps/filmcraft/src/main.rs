@@ -92,7 +92,7 @@ fn main() -> eframe::Result {
     register_hardware_decoders();
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_title("FilmCraft")
+            .with_title("Filmroom")
             .with_inner_size([1600.0, 980.0])
             .with_min_inner_size([900.0, 560.0])
             .with_drag_and_drop(true)
@@ -108,7 +108,7 @@ fn main() -> eframe::Result {
         ..Default::default()
     };
     let started = eframe::run_native(
-        "FilmCraft",
+        "Filmroom",
         options,
         Box::new(move |cc| {
             let mut session = Session::default();
@@ -174,7 +174,7 @@ fn main() -> eframe::Result {
             app.hooks.pick_file_for_relink =
                 Some(Box::new(|exts: &[&str], _hint| rfd::FileDialog::new().add_filter("Media", exts).pick_file().map(|p| p.to_string_lossy().to_string())));
             app.hooks.pick_save = Some(Box::new(|name: &str| {
-                rfd::FileDialog::new().add_filter("FilmCraft Project", &["fcproj"]).set_file_name(name).save_file().map(|p| p.to_string_lossy().to_string())
+                rfd::FileDialog::new().add_filter("Filmroom Project", &["fcproj"]).set_file_name(name).save_file().map(|p| p.to_string_lossy().to_string())
             }));
             app.hooks.pick_save_as = Some(Box::new(|filter: &str, exts: &[&str], name: &str| {
                 rfd::FileDialog::new().add_filter(filter, exts).set_file_name(name).save_file().map(|p| p.to_string_lossy().to_string())
@@ -188,7 +188,7 @@ fn main() -> eframe::Result {
                 rfd::FileDialog::new().add_filter(filter, exts).pick_file().map(|p| p.to_string_lossy().to_string())
             }));
             app.hooks.pick_open_project =
-                Some(Box::new(|| rfd::FileDialog::new().add_filter("FilmCraft Project", &["fcproj"]).pick_file().map(|p| p.to_string_lossy().to_string())));
+                Some(Box::new(|| rfd::FileDialog::new().add_filter("Filmroom Project", &["fcproj"]).pick_file().map(|p| p.to_string_lossy().to_string())));
             #[cfg(target_os = "macos")]
             {
                 let (rx, update) = native_menu::install(&app, cc.egui_ctx.clone());
@@ -206,10 +206,10 @@ fn main() -> eframe::Result {
     // The window could not be created (no usable GPU / graphics driver, no display): say so
     // instead of exiting silently, and keep the reason in the crash log.
     if let Err(e) = &started {
-        let msg = format!("FilmCraft could not start its window: {e}\n\nUpdating the graphics driver usually fixes this.");
+        let msg = format!("Filmroom could not start its window: {e}\n\nUpdating the graphics driver usually fixes this.");
         eprintln!("filmcraft: {msg}");
         filmcraft_ui_egui::crash::record(&msg);
-        let _ = rfd::MessageDialog::new().set_title("FilmCraft").set_description(&msg).set_level(rfd::MessageLevel::Error).show();
+        let _ = rfd::MessageDialog::new().set_title("Filmroom").set_description(&msg).set_level(rfd::MessageLevel::Error).show();
     }
     started
 }
